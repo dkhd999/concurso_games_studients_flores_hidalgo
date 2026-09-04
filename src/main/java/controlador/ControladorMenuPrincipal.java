@@ -15,6 +15,7 @@ import vista.GestionArbitrosVista;
 import vista.GestionSedesVista;
 import vista.GestionPatrocinadoresVista;
 import vista.ConsultaTorneoVista;
+import vista.ReporteTorneoVista;
 
 public class ControladorMenuPrincipal {
 
@@ -57,6 +58,7 @@ public class ControladorMenuPrincipal {
         vista.getBtnGestionSedes().addActionListener(this::abrirGestionSedes);
         vista.getBtnPatrocinadores().addActionListener(this::abrirGestionPatrocinadores);
         vista.getBtnConsultaTorneo().addActionListener(this::abrirConsultaTorneo);
+        vista.getBtnReporte().addActionListener(this::abrirReporteTorneo);
         vista.getBtnRegresar().addActionListener(e -> vista.dispose());
     }
 
@@ -111,5 +113,9 @@ public class ControladorMenuPrincipal {
 
     private void abrirConsultaTorneo(ActionEvent e) {
         abrirVentana(new ConsultaTorneoVista());
+    }
+
+    private void abrirReporteTorneo(ActionEvent e) {
+        abrirVentana(new ReporteTorneoVista());
     }
 }
