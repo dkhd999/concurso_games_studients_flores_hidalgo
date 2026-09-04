@@ -10,10 +10,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ModeloPartido;
 import modelo.ModeloTorneo;
-import modelo.ModeloEquipo;
 import modelo.ModeloArbitro;
 import modelo.ModeloRonda;
 import modelo.ModeloSede;
+import modelo.ModeloInscripcion;
 import vista.RegistroPartidosVista;
 
 public class ControladorRegistroPartidos {
@@ -21,23 +21,23 @@ public class ControladorRegistroPartidos {
     private final RegistroPartidosVista vista;
     private final ModeloPartido modelo;
     private final ModeloTorneo modeloTorneo;
-    private final ModeloEquipo modeloEquipo;
     private final ModeloArbitro modeloArbitro;
     private final ModeloRonda modeloRonda;
     private final ModeloSede modeloSede;
+    private final ModeloInscripcion modeloInscripcion;
     private boolean cargandoCombos = false;
 
     public ControladorRegistroPartidos(RegistroPartidosVista vista) {
         this.vista = vista;
         this.modelo = new ModeloPartido();
         this.modeloTorneo = new ModeloTorneo();
-        this.modeloEquipo = new ModeloEquipo();
         this.modeloArbitro = new ModeloArbitro();
         this.modeloRonda = new ModeloRonda();
         this.modeloSede = new ModeloSede();
+        this.modeloInscripcion = new ModeloInscripcion();
         initEventListeners();
         cargarCombosTorneos();
-        cargarCombosEquipos();
+        cargarCombosEquiposPorTorneo();
         cargarCombosArbitros();
         cargarCombosSedes();
     }
@@ -49,6 +49,7 @@ public class ControladorRegistroPartidos {
         vista.getCmbTorneo().addActionListener(e -> {
             if (!cargandoCombos) {
                 cargarRondas();
+                cargarCombosEquiposPorTorneo();
                 cargarTablaPartidos();
             }
         });
@@ -72,16 +73,22 @@ public class ControladorRegistroPartidos {
         }
     }
 
-    private void cargarCombosEquipos() {
+    private void cargarCombosEquiposPorTorneo() {
         try {
+            cargandoCombos = true;
+            int torneo = obtenerTorneoSeleccionado();
             DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-            ResultSet rs = modeloEquipo.consultarTodos();
-            while (rs.next()) {
-                model.addElement(rs.getInt("codigo_equipo") + " - " + rs.getString("nombre"));
+            if (torneo > 0) {
+                ResultSet rs = modeloInscripcion.consultarPorTorneo(torneo);
+                while (rs.next()) {
+                    model.addElement(rs.getInt("codigo_equipo") + " - " + rs.getString("equipo"));
+                }
             }
             vista.getCmbEquipoLocal().setModel(model);
             vista.getCmbEquipo2().setModel(model);
+            cargandoCombos = false;
         } catch (SQLException ex) {
+            cargandoCombos = false;
             Logger.getLogger(ControladorRegistroPartidos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -158,6 +165,11 @@ public class ControladorRegistroPartidos {
 
             if (fecha.isEmpty() || torneo <= 0 || ronda <= 0 || equipoLocal <= 0 || equipoVisita <= 0 || arbitro <= 0 || sede <= 0) {
                 JOptionPane.showMessageDialog(vista, "Complete todos los campos del partido.");
+                return;
+            }
+
+            if (equipoLocal == equipoVisita) {
+                JOptionPane.showMessageDialog(vista, "El equipo local y el equipo visitante no pueden ser el mismo.");
                 return;
             }
 

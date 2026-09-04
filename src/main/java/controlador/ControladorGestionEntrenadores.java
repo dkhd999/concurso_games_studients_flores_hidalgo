@@ -9,15 +9,15 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ModeloEntrenador;
 import modelo.ModeloEquipo;
-import vista.GestionArbitrosVista;
+import vista.GestionArbitrosVista1;
 
 public class ControladorGestionEntrenadores {
 
-    private final GestionArbitrosVista vista;
+    private final GestionArbitrosVista1 vista;
     private final ModeloEntrenador modelo;
     private final ModeloEquipo modeloEquipo;
 
-    public ControladorGestionEntrenadores(GestionArbitrosVista vista) {
+    public ControladorGestionEntrenadores(GestionArbitrosVista1 vista) {
         this.vista = vista;
         this.modelo = new ModeloEntrenador();
         this.modeloEquipo = new ModeloEquipo();
@@ -42,6 +42,12 @@ public class ControladorGestionEntrenadores {
     private void initEventListeners() {
         vista.getBtnGuardar().addActionListener(this::guardar);
         vista.getBtnVolver().addActionListener(e -> vista.dispose());
+        vista.getTxtIdEntrenador().addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                validarCedulaCampo();
+            }
+        });
         vista.getTblEntrenadores().addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -54,6 +60,13 @@ public class ControladorGestionEntrenadores {
         });
     }
 
+    private void validarCedulaCampo() {
+        String idStr = vista.getTxtIdEntrenador().getText().trim();
+        if (!idStr.isEmpty() && !ValidadorCedula.validarCedulaEcuatoriana(idStr)) {
+            JOptionPane.showMessageDialog(vista, "Cedula ecuatoriana invalida.");
+        }
+    }
+
     private void guardar(ActionEvent e) {
         try {
             String idStr = vista.getTxtIdEntrenador().getText().trim();
@@ -61,6 +74,11 @@ public class ControladorGestionEntrenadores {
 
             if (idStr.isEmpty() || nombre.isEmpty()) {
                 JOptionPane.showMessageDialog(vista, "Todos los campos son obligatorios.");
+                return;
+            }
+
+            if (!ValidadorCedula.validarCedulaEcuatoriana(idStr)) {
+                JOptionPane.showMessageDialog(vista, "Cedula ecuatoriana invalida.");
                 return;
             }
 

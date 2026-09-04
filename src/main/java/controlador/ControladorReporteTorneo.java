@@ -144,6 +144,14 @@ public class ControladorReporteTorneo {
                 });
             }
             vista.getTablaReporte().setModel(model);
+            vista.getTablaReporte().setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+            for (int c = 0; c < vista.getTablaReporte().getColumnCount(); c++) {
+                javax.swing.table.TableColumn columna = vista.getTablaReporte().getColumnModel().getColumn(c);
+                columna.setPreferredWidth(90);
+            }
+            vista.getTablaReporte().getColumnModel().getColumn(9).setPreferredWidth(70);
+            vista.getTablaReporte().revalidate();
+            vista.getTablaReporte().repaint();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorReporteTorneo.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(vista, "Error al generar el reporte: " + ex.getMessage());

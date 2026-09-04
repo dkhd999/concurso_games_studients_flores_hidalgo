@@ -8,16 +8,17 @@ package vista;
  *
  * @author Usuario
  */
-public class GestionEntrenadorVista extends javax.swing.JFrame {
+public class GestionArbitrosVista1 extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GestionEntrenadorVista.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GestionArbitrosVista1.class.getName());
+    private controlador.ControladorGestionEntrenadores controlador;
 
     /**
-     * Creates new form GestionEntrenador
+     * Creates new form GestionArbitrosVista
      */
-    public GestionEntrenadorVista() {
+    public GestionArbitrosVista1() {
         initComponents();
-        new controlador.ControladorGestionEntrenadorVista(this);
+        controlador = new controlador.ControladorGestionEntrenadores(this);
     }
 
     /**
@@ -29,10 +30,8 @@ public class GestionEntrenadorVista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblEntrenadores = new javax.swing.JTable();
-        btnVolver = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -41,10 +40,27 @@ public class GestionEntrenadorVista extends javax.swing.JFrame {
         cmbEquipo = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
         btnAsignar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblEntrenadores = new javax.swing.JTable();
+        btnVolver = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("REGISTRO DE ENTRENADORES");
+
+        jLabel2.setText("ID / Cédula:");
+
+        jLabel3.setText("Nombre:");
+
+        jLabel4.setText("Asignar a:");
+
+        cmbEquipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnGuardar.setText("Guardar");
+
+        btnAsignar.setText("Asignar");
 
         tblEntrenadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -60,18 +76,6 @@ public class GestionEntrenadorVista extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblEntrenadores);
 
         btnVolver.setText("Volver");
-
-        jLabel2.setText("ID / Cédula:");
-
-        jLabel3.setText("Nombre:");
-
-        jLabel4.setText("Asignar a:");
-
-        cmbEquipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        btnGuardar.setText("Guardar");
-
-        btnAsignar.setText("Asignar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,7 +108,7 @@ public class GestionEntrenadorVista extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,6 +152,7 @@ public class GestionEntrenadorVista extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> cmbEquipo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -158,7 +163,6 @@ public class GestionEntrenadorVista extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    // ====== Getters y setters (fuera de GEN) ======
     public javax.swing.JButton getBtnGuardar() {
         return btnGuardar;
     }

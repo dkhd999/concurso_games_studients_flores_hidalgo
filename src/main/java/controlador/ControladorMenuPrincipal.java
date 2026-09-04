@@ -11,7 +11,7 @@ import vista.InscripcionEquiposVista;
 import vista.AsignacionJugadoresVista;
 import vista.GestionRondasVista;
 import vista.RegistroPartidosVista;
-import vista.GestionArbitrosVista;
+import vista.GestionArbitrosVista1;
 import vista.GestionSedesVista;
 import vista.GestionPatrocinadoresVista;
 import vista.ConsultaTorneoVista;
@@ -80,7 +80,7 @@ public class ControladorMenuPrincipal {
     }
 
     private void abrirGestionEntrenadores(ActionEvent e) {
-        abrirVentana(new GestionArbitrosVista());
+        abrirVentana(new GestionEntrenadorVista());
     }
 
     private void abrirInscripcionEquipos(ActionEvent e) {
@@ -100,7 +100,7 @@ public class ControladorMenuPrincipal {
     }
 
     private void abrirGestionArbitros(ActionEvent e) {
-        abrirVentana(new GestionSedesVista());
+        abrirVentana(new GestionArbitrosVista1());
     }
 
     private void abrirGestionSedes(ActionEvent e) {

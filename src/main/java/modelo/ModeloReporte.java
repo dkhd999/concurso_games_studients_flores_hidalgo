@@ -33,6 +33,31 @@ public class ModeloReporte {
         return cs.executeQuery();
     }
 
+    public ResultSet consultarPaisesPorTorneo(int idTorneo) throws SQLException {
+        Connection con = conexionBDD.conectar();
+        CallableStatement cs = con.prepareCall("{call sp_reporte_paises_por_torneo(?)}");
+        cs.setInt(1, idTorneo);
+        return cs.executeQuery();
+    }
+
+    public ResultSet consultarEquiposPorPais() throws SQLException {
+        Connection con = conexionBDD.conectar();
+        CallableStatement cs = con.prepareCall("{call sp_estadistica_equipos_por_pais()}");
+        return cs.executeQuery();
+    }
+
+    public ResultSet consultarEquiposPorTorneo() throws SQLException {
+        Connection con = conexionBDD.conectar();
+        CallableStatement cs = con.prepareCall("{call sp_estadistica_equipos_por_torneo()}");
+        return cs.executeQuery();
+    }
+
+    public ResultSet consultarPosicionesFinales() throws SQLException {
+        Connection con = conexionBDD.conectar();
+        CallableStatement cs = con.prepareCall("{call sp_estadistica_posiciones_finales()}");
+        return cs.executeQuery();
+    }
+
     private void setParametroOpcional(CallableStatement cs, int index, Integer valor) throws SQLException {
         if (valor == null) {
             cs.setNull(index, Types.INTEGER);
