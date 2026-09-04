@@ -9,7 +9,7 @@ package vista;
  * @author Usuario
  */
 public class EstadisticaTorneos extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EstadisticaTorneos.class.getName());
     private controlador.ControladorEstadisticaTorneos controlador;
 

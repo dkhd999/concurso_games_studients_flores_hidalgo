@@ -170,19 +170,13 @@ public class ControladorEstadisticaTorneos {
         panel.setPreferredSize(new Dimension(640, 360));
         panel.setMinimumSize(new Dimension(560, 300));
         panel.setMaximumSize(new Dimension(640, 360));
-        panel.setMouseWheelEnabled(true);
 
         vista.getPnlGrafica().removeAll();
-        java.awt.BorderLayout layout = new java.awt.BorderLayout();
-        vista.getPnlGrafica().setLayout(layout);
-        vista.getPnlGrafica().setPreferredSize(new Dimension(640, 360));
-        vista.getPnlGrafica().setMinimumSize(new Dimension(560, 300));
-        vista.getPnlGrafica().setMaximumSize(new Dimension(640, 360));
+        vista.getPnlGrafica().setLayout(new java.awt.BorderLayout());
         vista.getPnlGrafica().add(panel, java.awt.BorderLayout.CENTER);
         vista.getPnlGrafica().revalidate();
         vista.getPnlGrafica().repaint();
 
         vista.pack();
-        vista.setLocationRelativeTo(vista);
     }
 }
